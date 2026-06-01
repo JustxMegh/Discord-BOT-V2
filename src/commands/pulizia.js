@@ -50,7 +50,7 @@ module.exports = {
                     { name: "💰 Prezzo Totale Pulizia", value: `**$${prezzoQuestaPulizia.toLocaleString()}**`, inline: true },
                     { name: "📊 Totale Famiglia", value: `**${dati.famiglie[idRuolo].totale}** bottiglie - **$${dati.famiglie[idRuolo].prezzoTotale.toLocaleString()}**`, inline: false }
                 )
-                .setImage('https://c.tenor.com/5YpoW-jD80kAAAAC/tenor.gif');
+                .setImage(`https://example.com/image.png?t=${Date.now()}`)
             
             await interaction.reply({ embeds: [embed] });
 
