@@ -42,7 +42,7 @@ module.exports = {
 
             const embed = new EmbedBuilder()
                 .setTitle("🧹 Pulizia Registrata")
-                .setDescription(`## ᴘᴜʟɪᴢɪᴀ ᴇꜱᴇɢᴜɪᴛᴀ ᴀ ${famiglia}`)
+                .setDescription(`***PULIZIA ESEGUITA ALLA FAMIGLIA*** ${famiglia}`)
                 .setColor(0x00FF00)
                 .addFields(
                     { name: "🍾 Bottiglie Aggiunte", value: `**${bottiglie}**`, inline: true },
