@@ -1,17 +1,38 @@
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, GatewayIntentBits, Collection } = require('discord.js');
+const { connectDB } = require('./config/mongodb');
 const fs = require('fs');
 const path = require('path');
-const { connectMongoDB } = require('./config/mongodb');
+require('dotenv').config();
 
-const discordClient = new Client({
+const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.GuildMembers,
         GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildPresences,
         GatewayIntentBits.DirectMessages,
-        GatewayIntentBits.GuildMessageReactions
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent
     ]
 });
+
+// Initialize commands collection
+client.commands = new Collection();
+
+// Load commands
+const commandsPath = path.join(__dirname, 'commands');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+    const filePath = path.join(commandsPath, file);
+    const command = require(filePath);
+    if ('name' in command && 'execute' in command) {
+        client.commands.set(command.name, command);
+        console.log(`✅ Loaded command: ${command.name}`);
+    } else {
+        console.warn(`⚠️ Command at ${filePath} is missing name or execute property`);
+    }
+}
 
 // Load events
 const eventsPath = path.join(__dirname, 'events');
@@ -21,18 +42,39 @@ for (const file of eventFiles) {
     const filePath = path.join(eventsPath, file);
     const event = require(filePath);
     if (event.once) {
-        discordClient.once(event.name, (...args) => event.execute(...args, discordClient));
+        client.once(event.name, (...args) => event.execute(...args, client));
+        console.log(`✅ Loaded event (once): ${event.name}`);
     } else {
-        discordClient.on(event.name, (...args) => event.execute(...args, discordClient));
+        client.on(event.name, (...args) => event.execute(...args, client));
+        console.log(`✅ Loaded event: ${event.name}`);
     }
 }
 
 // Connect to MongoDB and start bot
-connectMongoDB().then(() => {
-    const TOKEN = process.env.DISCORD_TOKEN;
-    if (!TOKEN) {
-        console.error("ERRORE CRITICO: La variabile d'ambiente 'DISCORD_TOKEN' non è impostata.");
-    } else {
-        discordClient.login(TOKEN);
+async function start() {
+    try {
+        await connectDB();
+        console.log('✅ Connected to MongoDB');
+        
+        await client.login(process.env.DISCORD_TOKEN);
+        console.log('✅ Bot logged in successfully');
+    } catch (error) {
+        console.error('❌ Failed to start bot:', error);
+        process.exit(1);
     }
+}
+
+start();
+
+// Graceful shutdown
+process.on('SIGINT', async () => {
+    console.log('⏹️ Shutting down gracefully...');
+    await client.destroy();
+    process.exit(0);
+});
+
+process.on('SIGTERM', async () => {
+    console.log('⏹️ Shutting down gracefully...');
+    await client.destroy();
+    process.exit(0);
 });
