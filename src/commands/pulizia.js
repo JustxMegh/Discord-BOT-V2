@@ -42,7 +42,7 @@ module.exports = {
 
             const embed = new EmbedBuilder()
                 .setTitle("🧹 Pulizia Registrata")
-                .setDescription(`## Pulizia eseguita a ${famiglia}`)
+                .setDescription(`## ᴘᴜʟɪᴢɪᴀ ᴇꜱᴇɢᴜɪᴛᴀ ᴀ ${famiglia}`)
                 .setColor(0x00FF00)
                 .addFields(
                     { name: "🍾 Bottiglie Aggiunte", value: `**${bottiglie}**`, inline: true },
@@ -50,7 +50,7 @@ module.exports = {
                     { name: "💰 Prezzo Totale Pulizia", value: `**$${prezzoQuestaPulizia.toLocaleString()}**`, inline: true },
                     { name: "📊 Totale Famiglia", value: `**${dati.famiglie[idRuolo].totale}** bottiglie - **$${dati.famiglie[idRuolo].prezzoTotale.toLocaleString()}**`, inline: false }
                 )
-                .setImage('https://i.pinimg.com/originals/ff/82/64/ff826461651840d930177cf874af2092.gif');
+                .setImage('https://i.pinimg.com/originals/82/eb/ca/82ebca8a8b0b1c4f21eb1f11867188d4.gif');
             
             await interaction.reply({ embeds: [embed] });
 
