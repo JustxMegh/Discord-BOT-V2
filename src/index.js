@@ -1,5 +1,5 @@
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
-const { connectDB } = require('./config/mongodb');
+const { connectMongoDB } = require('./config/mongodb');
 const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
@@ -53,7 +53,7 @@ for (const file of eventFiles) {
 // Connect to MongoDB and start bot
 async function start() {
     try {
-        await connectDB();
+        await connectMongoDB();
         console.log('✅ Connected to MongoDB');
         
         await client.login(process.env.DISCORD_TOKEN);
