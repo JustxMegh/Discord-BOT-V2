@@ -32,7 +32,7 @@ module.exports = {
             }
 
             const embed = new EmbedBuilder()
-                .setTitle("🏆 CLASSIFICA BOTTIGLIE FAMIGLIE 🏆")
+                .setTitle("🏆 ᴄʟᴀꜱꜱɪꜰɪᴄᴀ ʙᴏᴛᴛɪɢʟɪᴇ ꜰᴀᴍɪɢʟɪᴇ 🏆")
                 .setDescription(testoClassifica)
                 .setColor(0xFFD700)
                 .addFields(
