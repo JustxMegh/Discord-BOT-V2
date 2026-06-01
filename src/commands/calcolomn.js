@@ -23,7 +23,7 @@ module.exports = {
             const valoreFinale = differenza * 0.30;
 
             const embed = new EmbedBuilder()
-                .setTitle("💎 Calcolo MN")
+                .setTitle("💎 ᴄᴀʟᴄᴏʟᴏ ᴍᴇʀᴄᴀᴛᴏ ɴᴇʀᴏ")
                 .setColor(0x9C27B0)
                 .addFields(
                     { name: "🍾 Totale Bottiglie", value: `**${totaleBottiglie}**`, inline: true },
