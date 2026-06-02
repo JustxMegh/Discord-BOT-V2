@@ -46,7 +46,7 @@ module.exports = {
                 .setColor(0x00FF00)
                 .addFields(
                     { name: "🍾 Bottiglie Aggiunte", value: `**${bottiglie}**`, inline: true },
-                    { name: "💵 Prezzo Unitario", value: `**$${pricePerBottle}**`, inline: true },
+                    { name: "<:448501seeklmoney:1511167115405561978> Prezzo Unitario", value: `**$${pricePerBottle}**`, inline: true },
                     { name: "💰 Prezzo Totale Pulizia", value: `**$${prezzoQuestaPulizia.toLocaleString()}**`, inline: true },
                     { name: "📊 Totale Famiglia", value: `**${dati.famiglie[idRuolo].totale}** bottiglie - **$${dati.famiglie[idRuolo].prezzoTotale.toLocaleString()}**`, inline: false }
                 )
