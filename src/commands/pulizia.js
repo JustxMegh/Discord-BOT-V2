@@ -50,7 +50,7 @@ module.exports = {
                     { name: "💰 Prezzo Totale Pulizia", value: `**$${prezzoQuestaPulizia.toLocaleString()}**`, inline: true },
                     { name: "📊 Totale Famiglia", value: `**${dati.famiglie[idRuolo].totale}** bottiglie - **$${dati.famiglie[idRuolo].prezzoTotale.toLocaleString()}**`, inline: false }
                 )
-                .setImage(`https://i.pinimg.com/originals/ff/82/64/ff826461651840d930177cf874af2092.gif`)
+                .setImage(`https://i.pinimg.com/originals/80/db/a4/80dba4bbad6ced94183b54e9e8ad868c.gif`)
             
             await interaction.reply({ embeds: [embed] });
 
